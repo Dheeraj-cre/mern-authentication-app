@@ -1,0 +1,118 @@
+/* ===============================
+   Navbar Layout
+================================ */
+.navbar {
+  height: 64px;
+  padding: 0 30px;
+  background: linear-gradient(135deg, #6d28d9, #4f46e5);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
+
+/* ===============================
+   Brand
+================================ */
+.navbar-brand {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ecfdf5;
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  color: #2563eb; /* 🔵 accent on hover */
+}
+
+/* ===============================
+   Right Section
+================================ */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-user {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* ===============================
+   Links
+================================ */
+.navbar-link {
+  color: #ecfdf5;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  position: relative;
+}
+
+/* underline animation with accent color */
+.navbar-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0%;
+  height: 2px;
+  background: #2563eb; /* 🔵 accent */
+  transition: width 0.3s ease;
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+/* ===============================
+   Logout Button (Small & Clean)
+================================ */
+.navbar-logout {
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: #ecfdf5;
+  color: #2563eb;          /* 🔵 accent text */
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.navbar-logout:hover {
+  background: #2563eb;     /* 🔵 accent background */
+  color: #ffffff;
+}
+
+/* ===============================
+   Responsive
+================================ */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .navbar-user {
+    display: none; /* hide name on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .navbar-right {
+    gap: 12px;
+  }
+}
