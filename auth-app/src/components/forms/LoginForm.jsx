@@ -6,8 +6,7 @@ import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { loginApi } from "../../services/authService";
 import { setToken } from "../../utils/token";
-import "./LoginForm.css"
-
+import "./LoginForm.css";
 
 function LoginForm() {
   const { login } = useContext(AuthContext);
@@ -19,19 +18,21 @@ function LoginForm() {
   const onSubmit = async (data) => {
     try {
       setLoading(true);
+      console.log("Login data:", data);
 
       const res = await loginApi(data);
+      console.log("Login response:", res);
 
-      if (res.token) {
+      if (res?.token) {
         setToken(res.token);
         login(res.token);
         navigate("/dashboard");
       } else {
-        alert(res.message || "Login failed");
+        alert(res?.message || "Login failed");
       }
     } catch (error) {
-      alert(error.response?.data?.message || "Something went wrong");
       console.error("Login error:", error);
+      alert(error.message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -60,10 +61,10 @@ function LoginForm() {
       <p className="auth-link">
         Don’t have an account? <Link to="/signup">Signup</Link>
       </p>
-      <p className="auth-link">
-  <Link to="/forgot-password">Forgot Password?</Link>
-</p>
 
+      <p className="auth-link">
+        <Link to="/forgot-password">Forgot Password?</Link>
+      </p>
     </form>
   );
 }

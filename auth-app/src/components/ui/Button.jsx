@@ -7,7 +7,7 @@ function Button({
 }) {
   return (
     <button
-      type={type}
+      type={type}          // 🔥 THIS IS THE KEY
       onClick={onClick}
       disabled={disabled}
       style={{
