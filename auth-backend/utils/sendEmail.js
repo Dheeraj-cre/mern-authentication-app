@@ -1,19 +1,19 @@
 const nodemailer = require("nodemailer");
 
+// 🔹 SendGrid SMTP Transporter
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.sendgrid.net",
+  port: 587,
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, // Gmail App Password
-  },
-  tls: {
-    rejectUnauthorized: false, //  Fix for self-signed certificate
+    user: "apikey", // 👈 MUST be "apikey"
+    pass: process.env.SENDGRID_API_KEY,
   },
 });
 
+// 🔹 Send Email Function
 const sendEmail = async (email, otp) => {
   await transporter.sendMail({
-    from: `"MERN Auth App" <${process.env.EMAIL_USER}>`,
+    from: `"MERN Auth App" <${process.env.SENDGRID_FROM_EMAIL}>`,
     to: email,
     subject: "Security Verification – Password Reset OTP",
     html: `
@@ -47,11 +47,11 @@ const sendEmail = async (email, otp) => {
           </div>
 
           <p style="color:#374151; font-size:14px;">
-             This OTP is valid for <b>10 minutes</b> and can be used only once.
+            This OTP is valid for <b>10 minutes</b> and can be used only once.
           </p>
 
           <p style="color:#374151; font-size:14px;">
-             Do not share this OTP with anyone for your account’s safety.
+            Do not share this OTP with anyone for your account’s safety.
           </p>
 
           <p style="color:#6b7280; font-size:13px;">
