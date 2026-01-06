@@ -1,20 +1,15 @@
-const nodemailer = require("nodemailer");
+const sgMail = require("@sendgrid/mail");
 
-// 🔹 SendGrid SMTP Transporter
-const transporter = nodemailer.createTransport({
-  host: "smtp.sendgrid.net",
-  port: 587,
-  auth: {
-    user: "apikey", // 👈 MUST be "apikey"
-    pass: process.env.SENDGRID_API_KEY,
-  },
-});
+// Set API Key
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-// 🔹 Send Email Function
 const sendEmail = async (email, otp) => {
-  await transporter.sendMail({
-    from: `"MERN Auth App" <${process.env.SENDGRID_FROM_EMAIL}>`,
+  const msg = {
     to: email,
+    from: {
+      email: process.env.SENDGRID_FROM_EMAIL,
+      name: "MERN Auth App",
+    },
     subject: "Security Verification – Password Reset OTP",
     html: `
       <div style="font-family: Arial, sans-serif; padding: 24px; background:#f9fafb;">
@@ -23,12 +18,7 @@ const sendEmail = async (email, otp) => {
           <h2 style="color:#111827;">Security Verification Required</h2>
 
           <p style="color:#374151; font-size:14px;">
-            We received a request to reset your password. For security reasons,
-            we need to verify your identity.
-          </p>
-
-          <p style="color:#374151; font-size:14px;">
-            Please use the One-Time Password (OTP) below:
+            We received a request to reset your password.
           </p>
 
           <div style="margin:20px 0; text-align:center;">
@@ -47,33 +37,21 @@ const sendEmail = async (email, otp) => {
           </div>
 
           <p style="color:#374151; font-size:14px;">
-            This OTP is valid for <b>10 minutes</b> and can be used only once.
+            This OTP is valid for <b>10 minutes</b>.
           </p>
 
-          <p style="color:#374151; font-size:14px;">
-            Do not share this OTP with anyone for your account’s safety.
-          </p>
-
-          <p style="color:#6b7280; font-size:13px;">
-            If you did not initiate this request, you can safely ignore this email.
-            No changes will be made to your account.
-          </p>
-
-          <hr style="margin:20px 0;" />
+          <hr />
 
           <p style="font-size:13px; color:#6b7280;">
-            Stay secure,<br />
-            <b>Built by Dheeraj Srivastava</b>
-          </p>
-
-          <p style="font-size:11px; color:#9ca3af;">
-            This is an automated message. Please do not reply to this email.
+            Built by <b>Dheeraj Srivastava</b>
           </p>
 
         </div>
       </div>
     `,
-  });
+  };
+
+  await sgMail.send(msg);
 };
 
 module.exports = sendEmail;
