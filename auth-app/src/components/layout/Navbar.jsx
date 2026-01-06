@@ -1,18 +1,12 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-
-// CSS import
 import "./Navbar.css";
 
 function Navbar() {
-  const { user, token, logout, loading } = useContext(AuthContext);
+  const { token, loading } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
+  const [open, setOpen] = useState(false);
 
   if (loading || !token) return null;
 
@@ -23,19 +17,24 @@ function Navbar() {
         Authentication App
       </Link>
 
-      {/* Right Section */}
-      <div className="navbar-right">
-        {/* <span className="navbar-user">
-          Hi, <strong>{user?.name || "User"}</strong>
-        </span> */}
+      {/* Mobile Toggle */}
+      <button
+        className="navbar-toggle"
+        onClick={() => setOpen(!open)}
+        aria-label="Toggle Menu"
+      >
+        ☰
+      </button>
 
-        <Link to="/dashboard" className="navbar-link">
+      {/* Menu */}
+      <div className={`navbar-right ${open ? "active" : ""}`}>
+        <Link
+          to="/dashboard"
+          className="navbar-link"
+          onClick={() => setOpen(false)}
+        >
           Dashboard
         </Link>
-
-        {/* <button className="navbar-logout" onClick={handleLogout}>
-          Logout
-        </button> */}
       </div>
     </nav>
   );

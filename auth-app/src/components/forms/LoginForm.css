@@ -1,76 +1,112 @@
-/* ===== AUTH FORM CONTAINER ===== */
+/* ================= ROOT ================= */
 .auth-form {
   width: 100%;
   max-width: 420px;
-  margin: 60px auto;
-  padding: 32px 28px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px 36px;
+  border-radius: 24px;
+  box-shadow: 0 30px 60px -20px rgba(15, 23, 42, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
+  animation: fadeUp 0.6s ease;
 }
 
-/* ===== TITLE ===== */
+/* ================= TITLE ================= */
 .auth-title {
-  text-align: center;
-  font-size: 26px;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
 }
 
-/* ===== LINKS TEXT ===== */
+/* ================= LINKS ================= */
 .auth-link {
   text-align: center;
   font-size: 14px;
-  color: #555;
+  color: #475569;
 }
 
 .auth-link a {
-  color: #2563eb;
+  color: #0d9488;
+  font-weight: 600;
   text-decoration: none;
-  font-weight: 500;
 }
 
 .auth-link a:hover {
   text-decoration: underline;
 }
 
-/* ===== BUTTON FIX (if needed) ===== */
+/* ================= BUTTON FIX ================= */
+/* (Works with your Button component) */
 .auth-form button {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 8px;
+  height: 52px;
+  border-radius: 14px;
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(135deg, #0d9488, #1e3a8a);
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 12px 25px rgba(13, 148, 136, 0.35);
 }
 
-/* ============================= */
-/* 📱 MOBILE (max-width: 480px) */
-/* ============================= */
+.auth-form button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 35px rgba(13, 148, 136, 0.45);
+}
+
+.auth-form button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ================= INPUT SUPPORT ================= */
+/* Works with custom Input component */
+.auth-form label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.auth-form input {
+  width: 100%;
+  height: 50px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #0d9488;
+  box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.12);
+}
+
+/* ================= ANIMATION ================= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================= MOBILE ================= */
 @media (max-width: 480px) {
   .auth-form {
-    margin: 30px 16px;
-    padding: 24px 20px;
-  }
-
-  .auth-title {
-    font-size: 22px;
-  }
-
-  .auth-link {
-    font-size: 13px;
-  }
-}
-
-/* ============================= */
-/* 📱 TABLET (481px – 768px) */
-/* ============================= */
-@media (min-width: 481px) and (max-width: 768px) {
-  .auth-form {
-    margin: 50px auto;
-    padding: 28px 24px;
+    padding: 32px 24px;
+    border-radius: 20px;
   }
 
   .auth-title {
@@ -78,19 +114,8 @@
   }
 }
 
-/* ============================= */
-/* 💻 LAPTOP (769px – 1024px) */
-/* ============================= */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .auth-form {
-    max-width: 440px;
-  }
-}
-
-/* ============================= */
-/* 🖥 DESKTOP (1025px+) */
-/* ============================= */
-@media (min-width: 1025px) {
+/* ================= TABLET ================= */
+@media (min-width: 768px) {
   .auth-form {
     max-width: 460px;
   }

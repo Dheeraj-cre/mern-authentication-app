@@ -1,0 +1,93 @@
+/* ================= PAGE ================= */
+.page-center {
+  min-height: 100vh;
+  width: 100vw;                 /* 🔥 FIX */
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(135deg, #e2e8f0, #f8fafc);
+  overflow-x: hidden;           /* 🔥 FIX */
+}
+
+/* ================= WRAPPER ================= */
+.mobile-auth {
+  width: 100vw;                 /* 🔥 FIX */
+  max-width: 100vw;
+}
+
+/* ================= MOBILE HEADER ================= */
+.mobile-header {
+  display: none;
+  width: 100vw;                 /* 🔥 FIX */
+}
+
+/* ================= AUTH CARD ================= */
+.auth-card {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  box-shadow: 0 30px 60px -20px rgba(15, 23, 42, 0.15);
+}
+
+/* ================= MOBILE VIEW ================= */
+@media (max-width: 768px) {
+  .page-center {
+    align-items: flex-start;
+    padding: 0;
+    background: #e6f6f7;
+  }
+
+  .mobile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justifyjustify-content: center;
+    height: 260px;
+    background: linear-gradient(180deg, #0d9488, #155e75);
+    color: white;
+    position: relative;
+  }
+
+  .brand {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 40px;
+  }
+
+  .wave {
+    position: absolute;
+    bottom: -1px;
+    width: 100vw;              /* 🔥 FIX */
+    height: 80px;
+    background: white;
+    border-top-left-radius: 100% 80px;
+    border-top-right-radius: 100% 80px;
+  }
+
+  .auth-card {
+    margin-top: -40px;
+    border-radius: 32px 32px 0 0;
+    padding: 36px 24px;
+    max-width: 100%;
+    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.08);
+  }
+}
+
+/* ================= DESKTOP ================= */
+@media (min-width: 1024px) {
+  .page-center {
+    align-items: center;
+    background: linear-gradient(135deg, #0d9488, #1e3a8a);
+  }
+
+  .mobile-auth {
+    width: auto;
+    max-width: none;
+  }
+
+  .mobile-header {
+    display: none;
+  }
+}

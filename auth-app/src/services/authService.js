@@ -61,3 +61,45 @@ export async function getProfile(token) {
 
   return result;
 }
+
+/* ======================
+   FORGOT PASSWORD (Send OTP)
+====================== */
+export async function forgotPasswordApi(email) {
+  const res = await fetch(`${BASE_URL}/forgot-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email }),
+  });
+
+  const result = await res.json();
+
+  if (!res.ok) {
+    throw new Error(result.message || "Failed to send OTP");
+  }
+
+  return result;
+}
+
+/* ======================
+   RESET PASSWORD (Verify OTP)
+====================== */
+export async function resetPasswordApi(data) {
+  const res = await fetch(`${BASE_URL}/reset-password`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  const result = await res.json();
+
+  if (!res.ok) {
+    throw new Error(result.message || "Password reset failed");
+  }
+
+  return result;
+}

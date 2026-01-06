@@ -6,7 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import ForgotPassword from "./pages/ForgotPassword";
-import OTP from "./pages/OTP";
+// import OTP from "./pages/OTP";
 import ResetPassword from "./pages/ResetPassword";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
@@ -25,20 +25,34 @@ function App() {
       {token && <Navbar />}
 
       <Routes>
-        {/* Public Routes */}
+        {/* ================= PUBLIC AUTH ROUTES ================= */}
         <Route
           path="/login"
-          element={token ? <Navigate to="/dashboard" /> : <Login />}
+          element={token ? <Navigate to="/dashboard" replace /> : <Login />}
         />
+
         <Route
           path="/signup"
-          element={token ? <Navigate to="/dashboard" /> : <Signup />}
+          element={token ? <Navigate to="/dashboard" replace /> : <Signup />}
         />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/otp" element={<OTP />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* Protected Routes */}
+        <Route
+          path="/forgot-password"
+          element={token ? <Navigate to="/dashboard" replace /> : <ForgotPassword />}
+        />
+
+        {/* OTP + Reset are public but flow-controlled inside components */}
+        {/* <Route
+          path="/otp"
+          element={token ? <Navigate to="/dashboard" replace /> : <OTP />}
+        /> */}
+
+        <Route
+          path="/reset-password"
+          element={token ? <Navigate to="/dashboard" replace /> : <ResetPassword />}
+        />
+
+        {/* ================= PROTECTED ROUTES ================= */}
         <Route
           path="/dashboard"
           element={
@@ -48,10 +62,10 @@ function App() {
           }
         />
 
-        {/* Default */}
+        {/* ================= FALLBACK ================= */}
         <Route
           path="*"
-          element={<Navigate to={token ? "/dashboard" : "/login"} />}
+          element={<Navigate to={token ? "/dashboard" : "/login"} replace />}
         />
       </Routes>
     </>

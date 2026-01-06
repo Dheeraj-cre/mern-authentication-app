@@ -1,11 +1,17 @@
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
+
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
+import { forgotPasswordApi } from "../services/authService";
+
 import "./ForgotPassword.css";
 
 function ForgotPassword() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const {
     register,
@@ -13,47 +19,67 @@ function ForgotPassword() {
     formState: { errors },
   } = useForm();
 
-  function onSubmit(data) {
-    console.log("Email sent to:", data.email);
+  const onSubmit = async (data) => {
+    setLoading(true);
+    setServerError("");
 
-    // mock OTP send
-    navigate("/otp");
-  }
+    try {
+      await forgotPasswordApi(data.email);
+      navigate("/reset-password", {
+        state: { email: data.email },
+      });
+    } catch (error) {
+      setServerError(error.message || "Server error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="page-center">
-      <div className="auth-card">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-            Forgot Password
-          </h2>
-          <p className="under-processing">
-   Under Processing – This feature is not working yet
-</p>
+      <div className="mobile-auth">
 
+        {/* MOBILE HEADER */}
+        <header className="mobile-header">
+          <h1 className="brand">Welcome</h1>
+          <div className="wave" />
+        </header>
 
-          <Input
-            label="Email"
-            type="email"
-            placeholder="Enter registered email"
-            {...register("email", {
-              required: "Email is required",
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "Enter a valid email address",
-              },
-            })}
-          />
-          {errors.email && (
-            <p className="error">{errors.email.message}</p>
-          )}
+        {/* AUTH CARD */}
+        <section className="auth-card">
+          <form className="auth-form" onSubmit={handleSubmit(onSubmit)}>
+            <h2 className="auth-title">Forgot Password</h2>
 
-          <Button type="submit">Send OTP</Button>
+            <Input
+              label="Email"
+              type="email"
+              placeholder="Enter registered email"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Enter a valid email address",
+                },
+              })}
+            />
+            {errors.email && (
+              <p className="error">{errors.email.message}</p>
+            )}
 
-          <p style={{ marginTop: "15px", textAlign: "center" }}>
-            <Link to="/">Back to Login</Link>
-          </p>
-        </form>
+            {serverError && <p className="error">{serverError}</p>}
+
+            <Button type="submit" disabled={loading}>
+              {loading ? "Sending OTP..." : "Send OTP"}
+            </Button>
+
+            <p className="auth-link">
+              <Link to="/" className="back-link">
+                ← Back to Login
+              </Link>
+            </p>
+          </form>
+        </section>
+
       </div>
     </div>
   );

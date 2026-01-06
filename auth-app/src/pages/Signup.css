@@ -1,0 +1,65 @@
+.page-center {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mobile-auth {
+  width: 100%;
+}
+
+.mobile-header {
+  display: none;
+}
+
+.auth-card {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .page-center {
+    align-items: flex-start;
+    background: #e6f6f7;
+  }
+
+  .mobile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 260px;
+    background: linear-gradient(180deg, #0d9488, #155e75);
+    color: white;
+    position: relative;
+  }
+
+  .brand {
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 40px;
+  }
+
+  .wave {
+    position: absolute;
+    bottom: -1px;
+    width: 100%;
+    height: 80px;
+    background: white;
+    border-top-left-radius: 100% 80px;
+    border-top-right-radius: 100% 80px;
+  }
+
+  .auth-card {
+    margin-top: -40px;
+    border-radius: 32px 32px 0 0;
+    padding: 36px 24px;
+    max-width: 100%;
+  }
+}

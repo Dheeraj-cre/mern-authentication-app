@@ -7,41 +7,24 @@ const Input = forwardRef(
       type = "text",
       placeholder,
       error,
-      style = {},
+      className = "",
       ...rest
     },
     ref
   ) => {
     return (
-      <div style={{ marginBottom: "15px" }}>
-        {label && (
-          <label style={{ fontWeight: "600" }}>
-            {label}
-          </label>
-        )}
+      <div className="input-group">
+        {label && <label className="input-label">{label}</label>}
 
         <input
           ref={ref}
           type={type}
           placeholder={placeholder}
+          className={`input-field ${error ? "input-error" : ""} ${className}`}
           {...rest}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginTop: "6px",
-            borderRadius: "4px",
-            border: error ? "1px solid #dc2626" : "1px solid #cbd5f5",
-            outline: "none",
-            fontSize: "14px",
-            ...style,
-          }}
         />
 
-        {error && (
-          <p style={{ color: "#dc2626", fontSize: "12px", marginTop: "5px" }}>
-            {error}
-          </p>
-        )}
+        {error && <p className="input-error-text">{error}</p>}
       </div>
     );
   }

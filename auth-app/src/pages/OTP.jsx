@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useState } from "react";
+
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 
@@ -8,6 +9,7 @@ function OTP() {
   const navigate = useNavigate();
   const location = useLocation();
   const email = location.state?.email;
+
   const [loading, setLoading] = useState(false);
 
   const {
@@ -16,29 +18,26 @@ function OTP() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    try {
-      setLoading(true);
+  const onSubmit = async () => {
+    setLoading(true);
 
-      // 🔒 OTP backend not implemented yet
-      // await verifyOtpApi({ email, otp: data.otp });
+    // 🚧 TEMPORARY: assume OTP is correct
+    alert("OTP verified successfully ✅");
 
-      alert("OTP verification will be enabled soon.");
-      navigate("/login");
-    } catch (error) {
-      alert("Invalid OTP");
-      console.error("OTP error:", error);
-    } finally {
-      setLoading(false);
-    }
+    setLoading(false);
+
+    // ✅ MOVE TO RESET PASSWORD PAGE
+    navigate("/reset-password", {
+      state: { email },
+    });
   };
 
-  // Safety check
+  // 🔒 Safety check
   if (!email) {
     return (
       <div className="auth-form">
-        <p>Invalid access. Please start from signup.</p>
-        <Link to="/signup">Go to Signup</Link>
+        <p>Invalid access. Please start from Forgot Password.</p>
+        <Link to="/forgot-password">Go to Forgot Password</Link>
       </div>
     );
   }

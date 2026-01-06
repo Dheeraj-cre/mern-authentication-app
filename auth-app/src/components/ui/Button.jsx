@@ -3,24 +3,14 @@ function Button({
   type = "button",
   onClick,
   disabled = false,
-  style = {},
+  className = "",
 }) {
   return (
     <button
-      type={type}          // 🔥 THIS IS THE KEY
+      type={type}
       onClick={onClick}
       disabled={disabled}
-      style={{
-        padding: "10px 20px",
-        cursor: disabled ? "not-allowed" : "pointer",
-        opacity: disabled ? 0.7 : 1,
-        border: "none",
-        borderRadius: "4px",
-        background: "#2563eb",
-        color: "#fff",
-        fontWeight: "600",
-        ...style,
-      }}
+      className={`app-btn ${className}`}
     >
       {children}
     </button>
