@@ -61,3 +61,25 @@ export async function getProfile(token) {
 
   return result;
 }
+
+// resetpassword 
+export async function resetPasswordApi(data) {
+  const res = await fetch(
+    `${import.meta.env.VITE_BACKEND_URL}/api/auth/reset-password`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  const result = await res.json();
+
+  if (!res.ok) {
+    throw new Error(result.message || "Password reset failed");
+  }
+
+  return result;
+}
