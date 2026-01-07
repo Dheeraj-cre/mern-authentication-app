@@ -1,74 +1,101 @@
-MERN Authentication App
+MERN Authentication App – README
 
-Project Overview
+Project Name:
+MERN Authentication App (Login, Signup, Forgot Password with OTP)
 
-This is a full-stack authentication project built using the MERN stack. 
-The project demonstrates how login, registration, and secure authentication work in real-world web applications.
-
-Live Project Link:
+Live Demo:
+Frontend (Vercel):
 https://mern-authentication-app-nine.vercel.app/login
 
-GitHub Repository:
-https://github.com/Dheeraj-cre/mern-authentication-app
+Description:
+This is a full-stack MERN Authentication application that includes secure user authentication features such as:
+- User Registration (Signup)
+- User Login with JWT
+- Forgot Password with Email OTP verification
+- Reset Password using OTP
+- Protected Routes
+- Secure backend API
 
+This project is built with modern best practices and is production-ready for cloud deployment.
 
-What This Project Does
-
-• User Registration and Login
-• Secure authentication using JWT
-• Protected routes (only accessible after login)
-• Responsive design for mobile and desktop
-• Frontend deployed on Vercel
-
-
-Technologies Used
-
+Tech Stack:
 Frontend:
-React.js, JavaScript, HTML, CSS, React Router, Vite
+- React.js
+- React Router
+- React Hook Form
+- CSS (Custom UI)
+- Vite
 
 Backend:
-Node.js, Express.js, MongoDB, JWT
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- JWT Authentication
+- SendGrid Web API (Email OTP)
 
+Why SendGrid Web API (Important):
+Serverless platforms like Vercel and Render block SMTP connections.
+Therefore, this project uses SendGrid Web API instead of Nodemailer SMTP,
+which ensures reliable email delivery in production environments.
 
-Project Structure
+Features:
+- Secure authentication flow
+- Password hashing with bcrypt
+- OTP-based password reset with expiry time
+- Email delivery using SendGrid API
+- Environment-based configuration
+- Production-safe error handling
+- No user-enumeration vulnerability
 
-mern-authentication-app
-- auth-app (Frontend)
-- auth-backend (Backend)
+Project Structure:
+mern-authentication-app/
+│
+├── auth-app/ (Frontend)
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── styles/
+│
+├── auth-backend/ (Backend)
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── utils/
+│   └── server.js
 
+Environment Variables:
+Backend (.env):
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+SENDGRID_API_KEY=your_sendgrid_api_key
+SENDGRID_FROM_EMAIL=your_verified_email
 
-How Authentication Works
+Frontend (.env):
+VITE_BACKEND_URL=https://your-backend-url
 
-1. User enters email and password
-2. Backend verifies credentials
-3. JWT token is generated
-4. Token allows access to protected pages
+Setup Instructions:
+1. Clone the repository
+2. Install dependencies for frontend and backend
+3. Configure environment variables
+4. Run backend server
+5. Run frontend application
+6. Test authentication features
 
+Deployment:
+- Frontend deployed on Vercel
+- Backend deployed on Render
+- Email service powered by SendGrid Web API
 
-How to Run the Project
+Security Notes:
+- OTP expires after 10 minutes
+- Passwords are hashed using bcrypt
+- JWT is used for secure authentication
+- Forgot password response is generic to prevent email enumeration
 
-Frontend:
-cd auth-app
-npm install
-npm run dev
-
-Backend:
-cd auth-backend
-npm install
-npm start
-
-
-Learning Outcomes
-
-• Understanding JWT authentication
-• Frontend and backend integration
-• React protected routes
-• Deployment using Vercel
-
-
-Author
-
+Author:
 Dheeraj Srivastava
-GitHub: https://github.com/Dheeraj-cre
-LinkedIn: https://www.linkedin.com/in/dheerajsri
+
+Status:
+Project Completed and Production Ready
 
