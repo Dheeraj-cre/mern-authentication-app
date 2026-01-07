@@ -66,13 +66,13 @@ mern-authentication-app/
 
 Environment Variables:
 Backend (.env):
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-SENDGRID_API_KEY=your_sendgrid_api_key
-SENDGRID_FROM_EMAIL=your_verified_email
+MONGO_URI=xxxxxxx
+JWT_SECRET=xxxxxxx
+SENDGRID_API_KEY=xxxxxxxx
+SENDGRID_FROM_EMAIL=xxxxxx
 
 Frontend (.env):
-VITE_BACKEND_URL=https://your-backend-url
+VITE_BACKEND_URL=xxxxxxx
 
 Setup Instructions:
 1. Clone the repository
