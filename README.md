@@ -1,4 +1,4 @@
-MERN Authentication App – README
+MERN Authentication App 
 
 Project Name:
 MERN Authentication App (Login, Signup, Forgot Password with OTP)
